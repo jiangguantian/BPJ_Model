@@ -262,7 +262,7 @@ NSEL,S,LOC,Z,-0.01,0.01
 D,ALL,ALL
 CSYS,0
 
-
+!!!定义交界墩墩地约束!!!!
 NSEL,S,LOC,X,-11.4
 NSEL,R,LOC,Z,4.6
 D,ALL,ALL
