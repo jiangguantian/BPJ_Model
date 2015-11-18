@@ -44,6 +44,16 @@ N=3
 MA=6
 !------------------------------------------------!
 
+/INPUT,1-5KP1,mac
+/INPUT,6-20KP1,mac
+/INPUT,1-5KPB1,mac
+/INPUT,6-7KPB1,mac
+/INPUT,8-20KPB1,mac
+/INPUT,HLDKP1,mac  
+/INPUT,DZKP1,mac 
+/INPUT,LXLKP,mac   
+
+
 
 
 !~~~~~~~~~~~~~导入1-5号钢构件截面~~~~~~~~~~~~~~~~!
@@ -274,7 +284,7 @@ SECDATA,34,KX(J+24),KY(J+24),KZ(J+24)!对应连续梁的23、24号点
 /INPUT,HNTB8-20-1,MAC
 /INPUT,HLDB1,MAC
 !~~~~~~~~~~~~~~~~~~建立交界墩和D1~D5~~~~~~~~~~~~~~~~~~~~!
-/INPUT,DZ,MAC
+/INPUT,DZ1,MAC
 !----------------------------END-----------------------------!
 
 
