@@ -17,8 +17,8 @@ J=22000
 L,J+1,J+2
 A=LSINQR(0,14)
 LSEL,S,,,A
-LESIZE,ALL,,,N
-LATT,2,,1,,J+7,,16
+LESIZE,ALL,,,N!!!!!!此处（没有）更改了全局性的杆件分段数
+LATT,2,,1,,J+7,,6
 
 L,J+2,J+3
 A=LSINQR(0,14)
