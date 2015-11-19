@@ -97,11 +97,13 @@ SECREAD,N4,SECT,,MESH
 !~~~~~~~~~~~~~~~~~~定义交界墩截面~~~~~~~~~~~~~~~~~~~~!
 !----------------------START-------------------------!
 !~~~~~~~~~~~~~~~~~~定义6号截面（交界墩1-1截面）
-SECTYPE,6,BEAM,RECT
-SECDATA,7.5,8.37,1.5,1.5,0.9,0.9
+SECTYPE,6,BEAM,MESH
+SECOFFSET,USER
+SECREAD,JJD_1-1,SECT,,MESH
 !~~~~~~~~~~~~~~~~~~定义7号截面（交界墩2-2截面）
-SECTYPE,7,BEAM,HREC            
-SECDATA,7.5,4.50,1.5,1.5,0.7,0.7
+SECTYPE,7,BEAM,MESH
+SECOFFSET,USER
+SECREAD,JJD_2-2,SECT,,MESH
 !~~~~~~~~~~~~~~~~~~定义8号变截面（交界墩1-2截面）
 SECTYPE,8,TAPER
 SECDATA,6,KX(22001),KY(22001),KZ(22001)
