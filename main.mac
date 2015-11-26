@@ -588,28 +588,11 @@ NROPT,FULL
 !-------------模拟钢管架立好后尚未浇筑管内混凝土状态下全桥应力
 TIME,1
 NSUBST,3
-ESEL,S,TYPE,,2
+ESEL,S,MAT,,2
+ESEL,A,MAT,,3
+ESEL,A,MAT,,4
 EKILL,ALL
 
-LSEL,NONE
-*DO,I,1,20
-
-*DO,Z,1,4
-LSEL,A,,,NSHNT%Z%%I%
-LSEL,A,,,NXHNT%Z%%I%
-LSEL,A,,,WSHNT%Z%%I%
-LSEL,A,,,WXHNT%Z%%I%
-*ENDDO
-
-*ENDDO
-
-
-*DO,I,1,4
-LSEL,A,,,HLDHNT%I%
-*ENDDO
-
-ESLL,S
-EKILL,ALL
 
 ALLSEL
 ACEL,,,9.8
@@ -635,7 +618,7 @@ ACEL,,,9.8
 SOLVE
 *ENDDO
 !-------------第22荷载步
-!-------------模拟逐段灌注合拢段钢管内的混凝土
+!-------------模拟灌注合拢段钢管内的混凝土
 TIME,22
 NSUBST,3
 LSEL,NONE
@@ -659,6 +642,7 @@ ASEL,NONE
 *DO,Z,1,4
 ASEL,A,,,B%Z%%I%
 *ENDDO
+
 ESLA,S
 EALIVE,ALL
 ALLSEL
@@ -673,13 +657,59 @@ ASEL,NONE
 *DO,I,1,4
 ASEL,A,,,HLDB%I%
 *ENDDO
+ 
 ESLA,S
 EALIVE,ALL
 ALLSEL
 ACEL,,,9.8
 SOLVE
+!-------------第44荷载步
+!-------------模拟JJD（交界墩）的施工
+TIME,44
+NSUBST,3
+LSEL,NONE
+*DO,I,1,2
+ASEL,A,,,JJD%I%
+*ENDDO
+ 
+ESLL,S
+EALIVE,ALL
+ALLSEL
+ACEL,,,9.8
+SOLVE
+!-------------第45~48荷载步
+!-------------模拟D1~D5（拱上墩）的施工
+*DO,I,1,4
+TIME,I+44
+NSUBST,3
+LSEL,NONE
+*DO,Z,1,4
+LSEL,A,,,D%I%%Z%
+LSEL,A,,,D%I%%Z%
+LSEL,A,,,D%I%%Z%
+LSEL,A,,,D%I%%Z%
+*ENDDO
 
+ESLL,S
+EALIVE,ALL
 
+ALLSEL
+ACEL,,,9.8
+SOLVE
+*ENDDO
+!-------------第49荷载步
+!-------------模拟LXL（连续梁）的施工
+TIME,49
+NSUBST,3
+LSEL,S,,,LXL
+
+ESLL,S
+EALIVE,ALL
+
+ALLSEL
+ACEL,,,9.8
+SOLVE
+*ENDDO
 FINISH
 !---------------------------END-----------------------------!
 
@@ -697,7 +727,7 @@ FINISH
 !~~~~找轴向应力+弯曲应力的最大值~~~~~~~~!
 !---------------------------------------!
 *ASK,HZB,Load Step Number
-!HZB代表关键荷载步1(骨架合拢),22(管内混凝土灌注完毕),43(混凝土板浇筑完毕)
+!HZB代表关键荷载步1(骨架合拢),22(管内混凝土灌注完毕),43(混凝土板浇筑完毕),48(拱上墩施工完毕),49(连续梁施工完毕)
 SET,HZB
 LSEL,NONE
 *DO,I,1,20
@@ -715,9 +745,9 @@ ETABLE,SBZBI,SMISC,35
 SADD,SIGI_1,SDIRI,SBZTI
 SADD,SIGI_2,SDIRI,SBZBI
 PLETAB,SIGI_1
-/WAIT,3
+/WAIT,10
 PLETAB,SIGI_2
-/WAIT,3
+/WAIT,10
 PRETAB,SIGI_1,SIGI_2
 
 
@@ -752,9 +782,9 @@ ETABLE,SBZBI,SMISC,35
 SADD,SIGI_1,SDIRI,SBZTI
 SADD,SIGI_2,SDIRI,SBZBI
 PLETAB,SIGI_1
-/WAIT,3
+/WAIT,10
 PLETAB,SIGI_2
-/WAIT,3
+/WAIT,10
 PRETAB,SIGI_1,SIGI_2
 
 
@@ -770,24 +800,24 @@ PRETAB,SIGI_1,SIGI_2
 
 
 
-!
-!!---------------------------------------!
-!!~~~~以下命令用于求混凝土板的最大压应力~~~~~~~~~!
-!!---------------------------------------!
-!ESEL,S,TYPE,,2
-!ETABLE,S3D1,NMISC,3
-!ETABLE,S3D2,NMISC,8
-!ETABLE,S3D3,NMISC,13
-!ETABLE,S3D4,NMISC,18
-!PLETAB,S3D1
-!/WAIT,3
-!PLETAB,S3D2
-!/WAIT,3
-!PLETAB,S3D3
-!/WAIT,3
-!PLETAB,S3D4
-!/WAIT,3
-!PRETAB,S3D1,S3D2,S3D3,S3D4
+
+!---------------------------------------!
+!~~~~以下命令用于求混凝土板的最大压应力~~~~~~~~~!
+!---------------------------------------!
+ESEL,S,TYPE,,2
+ETABLE,S3D1,NMISC,3
+ETABLE,S3D2,NMISC,8
+ETABLE,S3D3,NMISC,13
+ETABLE,S3D4,NMISC,18
+PLETAB,S3D1
+/WAIT,10
+PLETAB,S3D2
+/WAIT,10
+PLETAB,S3D3
+/WAIT,10
+PLETAB,S3D4
+/WAIT,10
+PRETAB,S3D1,S3D2,S3D3,S3D4
 
 
 
