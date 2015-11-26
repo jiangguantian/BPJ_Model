@@ -464,26 +464,13 @@ ASEL,S,,,HLDB4
 NUMMRG,KP
 
 !!!----------------------------¶Ô³ÆJJDºÍD1~D5----------------------------!!!
-!------------------------JJD
+!------------------------¶Ô³ÆJJD
 LSEL,S,,,JJD1
-LSYMM,Y,ALL
+LOCAL,11,0,445/2,0,0
+LSYMM,X,ALL
+CSYS,0
 LSEL,U,,,JJD1
 CM,JJD2,LINE
-
-LSEL,S,,,JJD1
-LOCAL,11,0,445/2,0,0
-LSYMM,X,ALL
-CSYS,0
-LSEL,U,,,JJD1
-CM,JJD3,LINE
-
-
-LSEL,S,,,JJD2
-LOCAL,11,0,445/2,0,0
-LSYMM,X,ALL
-CSYS,0
-LSEL,U,,,JJD2
-CM,JJD4,LINE
 
 
 !--------------------------D1~D4
